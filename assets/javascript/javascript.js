@@ -9,7 +9,7 @@ function renderButtons() {
   for (var i = 0; i < topics.length; i++) {
     // create new buttons
     var newButton = $("<button>");
-    newButton.addClass("animal-btn")
+    newButton.addClass("animal-btn btn btn-primary m-1")
     // give an attribute of the animal type
     newButton.attr("data-name", topics[i]);
     newButton.text(topics[i]);
@@ -20,7 +20,7 @@ function renderButtons() {
 // add functionality on the buttons
 $(document).on("click", ".animal-btn", function () {
   // url of the gifs for the animal
-  var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=dc6zaTOxFJmzC&q=" + $(this).attr("data-name") + "&limit=5&rating=g";
+  var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=dc6zaTOxFJmzC&q=" + $(this).attr("data-name") + "&limit=10&rating=g";
 
   $.ajax({
     url: queryURL,
@@ -36,6 +36,7 @@ $(document).on("click", ".animal-btn", function () {
 
       var animalImage = $("<img>");
       animalImage.addClass("gif")
+
       // adding attributes to each image tag of animal
       animalImage.attr({
         "src": results[i].images.fixed_width_still.url,
@@ -73,7 +74,7 @@ $(document).on("click", ".gif", function () {
 
 // adding on click functionality to submit a new animal to the buttons
 $("#add-animal").on("click", function (event) {
-  // preventing the form from refreshing
+  // preventing the webpage from refreshing
   event.preventDefault();
   var animal = $("#animal-input").val().trim();
   topics.push(animal);
